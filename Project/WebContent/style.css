@@ -1,0 +1,34 @@
+body {
+	width:100%;
+	margin:0;
+	padding:0;
+	color:#666;
+	font-family:Century Gothic,'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+	line-height:1.6em;
+	background:#feffff
+	}
+p {
+	margin:0 0 2em;
+	padding:0
+	}
+#container {
+	width:80%;
+	max-width:900px;
+	margin:auto;
+	padding:30px
+	}
+pre {
+	color:#69F;
+	border:solid 1px #ccc;
+	padding:1em;
+	margin:1em 0 0;
+	}
+header {
+	display:block;
+	padding:30px;
+	background:#333;
+	color:white
+	}
+h1 {
+	font-size:240%
+	}
