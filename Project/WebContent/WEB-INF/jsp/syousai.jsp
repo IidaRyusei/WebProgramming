@@ -18,7 +18,7 @@
 	<header>
 	<h2 class="center2">${userInfo.name}さん</h2>
 	<div class="right">
-	<a href="Login">ログアウト</a>
+	<a href="Logout">ログアウト</a>
 	</div>
 	</header>
 	<!-- /header -->

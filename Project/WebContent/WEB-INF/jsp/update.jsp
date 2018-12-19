@@ -17,14 +17,13 @@ height: 50px;
 
 	<header> <font color="white"><div class="center">${userInfo.name}</div></font>
 	<div class="right">
-		<font color="red"> <a href="/Example/Login"
-			method="get">ログアウト</a></font>
+		<font color="red"> <a href="Logout">ログアウト</a></font>
 	</div>
 	</header>
 	<div id="container"></div>
 	<h1 class="center2">ユーザ情報更新</h1>
 
-	<form action="/Example/Update" method="post">
+	<form action="Update" method="post">
 
 <input type="hidden" name="id" value="${syousai.id}">
 

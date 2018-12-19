@@ -50,17 +50,38 @@ public class UserList extends HttpServlet {
         dispatcher.forward(request, response);
 	}
 
-		// ユーザ一覧情報を取得
-		AaaaUserDao userDao = new AaaaUserDao();
-		List<AaaaUser> userList = userDao.findAll();
-
-		// リクエストスコープにユーザ一覧情報をセット
-		request.setAttribute("userList", userList);
+	    String user=userInfo.getName();
+    if( user.equals("管理者")) {
 
 
-		// ユーザ一覧のjspにフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
-		dispatcher.forward(request, response);
+    	// 管理者
+ 		AaaaUserDao userDao = new AaaaUserDao();
+ 		List<AaaaUser> userList = userDao.findAll();
+
+ 		// リクエストスコープにユーザ一覧情報をセット
+ 		request.setAttribute("userList", userList);
+
+
+ 		// ユーザ一覧のjspにフォワード
+ 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
+ 		dispatcher.forward(request, response);
+
+	}
+
+  //管理者以外にログインした場合テーブルに管理者のデータを表示させない為の処理
+
+
+ // ユーザ一覧情報を取得
+ 		AaaaUserDao userDao = new AaaaUserDao();
+ 		List<AaaaUser> userList = userDao.TopRemove();
+
+ 		// リクエストスコープにユーザ一覧情報をセット
+ 		request.setAttribute("userList", userList);
+
+
+ 		// ユーザ一覧のjspにフォワード
+ 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
+ 		dispatcher.forward(request, response);
 
 	}
 

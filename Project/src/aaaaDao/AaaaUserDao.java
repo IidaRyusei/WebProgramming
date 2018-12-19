@@ -57,6 +57,63 @@ public class AaaaUserDao {
 		return aaaalist;
 	}
 
+
+	public List<AaaaUser> TopRemove() {
+		Connection conn = null;
+		List<AaaaUser> aaaalist = new ArrayList<AaaaUser>();
+
+		try {
+			// データベースへ接続
+			conn = AaaaManager.getConnection();
+
+			// SELECT文を準備
+			String sql = "SELECT * FROM user WHERE id>=2";
+
+			// SELECTを実行し、結果表を取得
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			// 結果表に格納されたレコードの内容を
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String li = rs.getString("login_id");
+				String name = rs.getString("name");
+				String birth = rs.getString("birth_date");
+				String pass = rs.getString("password");
+				String create = rs.getString("create_date");
+				String update = rs.getString("update_date");
+				AaaaUser aaaa = new AaaaUser(id, li, name, birth, pass, create, update);
+				aaaalist.add(aaaa);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			// データベース切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+		return aaaalist;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public AaaaUser findById(String loginId, String password) {
 		Connection conn = null;
 		try {

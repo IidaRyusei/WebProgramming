@@ -12,7 +12,7 @@
 <font color="red">${errMsg}</font>
 </c:>
 
-<h1 class="center">ログイン画面</h1>
+<h1 class="center2">ログイン画面</h1>
 
 <form action="Login" method="post">
 <div class="center2">ログインID：<input type="text" name="name"><br>

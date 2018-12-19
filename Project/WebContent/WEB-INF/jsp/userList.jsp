@@ -13,19 +13,19 @@
 
 
 <header>
-<font color="white"><div class="center">${userInfo.name}</div></font>
+<font color="white"><div class="center2">${userInfo.name}</div></font>
 <div class="right"><font color="red">
 <a href="Logout" method="get">ログアウト</a></font></div>
 </header>
 <div id="container"></div>
 <br>
 <br>
-<h1 class="center">ユーザ一覧</h1>
+<h1 class="center2">ユーザ一覧</h1>
 
 <div class="right"><font color="#0000FF">
-<a href="/Example/NewUser" method="get">新規登録</a></font></div>
+<a href="NewUser" method="get">新規登録</a></font></div>
 
-<form action="/Example/UserSearch" method="post">
+<form action="UserSearch" method="post">
 
 <div class="center2">ログインID<input type="text" name="loginId"></div>
 <br>
@@ -54,40 +54,38 @@ ${err}
   </thead>
   <tbody>
 
-  <c:if test="${userInfo.name == 管理者}">
-    <c:forEach var="user" items="${userList}">
+<c:if test="${userInfo.name =='管理者'}">
+
+<c:forEach var="user" items="${userList}">
     <tr>
     <td scope="col">${user.login_id}</td>
     <td scope="col">${user.name}</td>
     <td scope="col">${user.birth_date}</td>
     <td>
-    <a href="/Example/Syousai?id=${user.id}" method="get">詳細</a>
-    <a href="/Example/Update?id=${user.id}" method="get">更新</a>
-    <a href="/Example/Delete?id=${user.id}" method="get">削除</a>
+    <a href="Syousai?id=${user.id}" method="get">詳細</a>
+    <a href="Update?id=${user.id}" method="get">更新</a>
+    <a href="Delete?id=${user.id}" method="get">削除</a>
     </td>
     </tr>
  </c:forEach>
 </c:if>
 
-
-<!--
-    <c:if test="${userInfo.name!=管理者}">
-    <c:forEach var="user" items="${userList}">
+<c:if test="${userInfo.name !='管理者'}">
+<c:forEach var="user" items="${userList}">
     <tr>
     <td scope="col">${user.login_id}</td>
     <td scope="col">${user.name}</td>
     <td scope="col">${user.birth_date}</td>
     <td>
-    <a href="/Example/Syousai?id=${user.id}" method="get">詳細</a>
-    <c:if test="${userInfo.login_id==user.login_id}">
-    <a href="/Example/Update?id=${user.id}" method="get">更新</a>
+
+    <a href="Syousai?id=${user.id}" method="get">詳細</a>
+    <c:if test="${userInfo.name ==user.name}">
+    <a href="Update?id=${user.id}" method="get">更新</a>
     </c:if>
     </td>
     </tr>
     </c:forEach>
-    </c:if>
--->
-
+</c:if>
   </tbody>
 </table>
 </form>

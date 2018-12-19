@@ -32,13 +32,13 @@ p.example3 { word-spacing: -0.2em; }
 <div class="header">
 <font color="white"><div class="center">${userInfo.name}</div></font>
 <div class="right"><font color="red">
-<a href="/Example/Logout" method="get">ログアウト</a></font></div>
+<a href="Logout">ログアウト</a></font></div>
 </div>
 
 <br><br>
 <h1 class="center2">ユーザ新規登録</h1>
 <br><br><br>
-<form action="/Example/NewUser" method="post">
+<form action="NewUser" method="post">
 
 <div class="center2">ログインID<input type="text" name="loginId" value="${loginId}"></div>
 <br><br>

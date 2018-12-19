@@ -18,7 +18,7 @@
 	<header>
 	<h2 class="center2">${userInfo.name}さん</h2>
 	<div class="right">
-	<a href="/Example/Logout">ログアウト</a>
+	<a href="Logout">ログアウト</a>
 	</div>
 	</header>
 	<!-- /header -->
@@ -100,7 +100,7 @@
 
 
 <p class="center2">このユーザを切り替える場合はログインID,パスワードの入力をお願いします。</p>
-<form action="Example/UserSearch" method="get" class="center2">
+<form action="UserSearch" method="get" class="center2">
 <p>ログインID<input type="text" name="loginId"></p>
 <p>パスワード<input type="password" name="pass"></p>
 <p><input type="submit" value="切替"></p>
