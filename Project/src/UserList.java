@@ -89,8 +89,47 @@ public class UserList extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+
+		//リクエストパラメータの文字コードを指定
+				request.setCharacterEncoding("UTF-8");
+
+				// HttpSessionインスタンスの取得
+			    HttpSession session = request.getSession();
+
+			    // セッションスコープからインスタンスを取得
+			    AaaaUser userInfo = (AaaaUser)session.getAttribute("userInfo");
+
+			    if(userInfo == null) {
+
+				 //フォワード
+		        RequestDispatcher dispatcher =
+		        request.getRequestDispatcher("/WEB-INF/jsp/loginn.jsp");
+		        dispatcher.forward(request, response);
+			}
+
+				// リクエストパラメータの取得
+				String id = request.getParameter("loginId");
+				String name = request.getParameter("name");
+				String date = request.getParameter("date");
+				String date2 = request.getParameter("date2");
+
+
+				// リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
+						AaaaUserDao userDao = new AaaaUserDao();
+						List<AaaaUser> user = userDao.findUser(id , name, date,date2);
+
+
+
+						// リクエストスコープにユーザ一覧情報をセット
+				 		request.setAttribute("userList", user);
+
+				// 詳細jspにフォワード
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
+					dispatcher.forward(request, response);
+
+
+
 	}
 
 }

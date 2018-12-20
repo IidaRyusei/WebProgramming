@@ -106,37 +106,20 @@ public class UserSearch extends HttpServlet {
 		String id = request.getParameter("loginId");
 		String name = request.getParameter("name");
 		String date = request.getParameter("date");
+		String date2 = request.getParameter("date2");
 
 
 		// リクエストパラメータの入力項目を引数に渡して、Daoのメソッドを実行
 				AaaaUserDao userDao = new AaaaUserDao();
-				AaaaUser user = userDao.Search(id , name, date);
-
-				/** テーブルに該当のデータが見つからなかった場合 **/
-				if (user == null || id=="") {
-
-				// ユーザ一覧情報を取得
-					AaaaUserDao a = new AaaaUserDao();
-					List<AaaaUser> userList = a.findAll();
-
-					// リクエストスコープにユーザ一覧情報をセット
-					request.setAttribute("userList", userList);
-					// リクエストスコープにエラーメッセージをセット
-					request.setAttribute("err", "ログインIDまたはユーザ名または生年月日が異なります。");
-
-					// ユーザ一覧jspにフォワード
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
-					dispatcher.forward(request, response);
-					return;
-				}
+				List<AaaaUser> user = userDao.findUser(id , name, date,date2);
 
 
-		/*// セッションにユーザの情報をセット
-		HttpSession session = request.getSession();*/
-		session.setAttribute("syousai", user);
+
+				// リクエストスコープにユーザ一覧情報をセット
+		 		request.setAttribute("userList", user);
 
 		// 詳細jspにフォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/syousai2.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
 			dispatcher.forward(request, response);
 }
 }

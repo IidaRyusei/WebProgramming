@@ -57,7 +57,7 @@ public class AaaaUserDao {
 		return aaaalist;
 	}
 
-
+	//管理者ユーザのデータ情報を出力しないようにするためのDaoメソッド
 	public List<AaaaUser> TopRemove() {
 		Connection conn = null;
 		List<AaaaUser> aaaalist = new ArrayList<AaaaUser>();
@@ -101,17 +101,6 @@ public class AaaaUserDao {
 		}
 		return aaaalist;
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 
 	public AaaaUser findById(String loginId, String password) {
@@ -196,6 +185,7 @@ public class AaaaUserDao {
 		return null;
 	}
 
+	//ユーザ詳細情報
 	public AaaaUser syousai(String userId) {
 		Connection conn = null;
 		try {
@@ -240,7 +230,7 @@ public class AaaaUserDao {
 			}
 		}
 	}
-
+	//ユーザデータ更新
 	public AaaaUser UpDate(String id, String login, String name, String birth) {
 		Connection conn = null;
 		try {
@@ -280,6 +270,8 @@ public class AaaaUserDao {
 			}
 		}
 	}
+
+	//ユーザ削除
 	public void Delete(String id) {
 		Connection conn = null;
 		try {
@@ -360,4 +352,70 @@ public class AaaaUserDao {
 
 		}
 	}
+
+
+
+
+	//ユーザ検索処理
+		public List<AaaaUser> findUser(String loginId, String name, String birthdayStart, String birthdayEnd) {
+			Connection conn = null;
+			List<AaaaUser> aaaalist = new ArrayList<AaaaUser>();
+
+			try {
+				// データベースへ接続
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				conn = AaaaManager.getConnection();
+
+				// SELECT文を準備
+				String sql = "SELECT * FROM user WHERE id>=2";
+
+				if(!loginId.equals("")) {
+					sql += " AND login_id = '" + loginId + "'";
+				}
+
+
+				if(!name.equals("")) {
+					sql += " AND name LIKE '%"+name+"%'";
+				}
+
+
+				if(!birthdayStart.equals("")) {
+
+					sql += " AND birth_date >= '" + birthdayStart +"'";
+
+				}
+
+				if(!birthdayEnd.equals("")) {
+					sql += " AND birth_date <= '" + birthdayEnd + "'";
+				}
+
+				// SELECTを実行し、結果表を取得
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				// 結果表に格納されたレコードの内容を
+
+				while (rs.next()) {
+					String li = rs.getString("login_id");
+					String userName = rs.getString("name");
+					String birth = rs.getString("birth_date");
+					AaaaUser aaaa = new AaaaUser(li, userName, birth);
+					aaaalist.add(aaaa);
+				}
+			} catch (SQLException | ClassNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			} finally {
+				// データベース切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						return null;
+					}
+				}
+			}
+			return aaaalist;
+		}
+
 }

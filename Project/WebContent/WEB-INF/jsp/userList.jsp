@@ -25,7 +25,7 @@
 <div class="right"><font color="#0000FF">
 <a href="NewUser" method="get">新規登録</a></font></div>
 
-<form action="UserSearch" method="post">
+<form action="UserList" method="post">
 
 <div class="center2">ログインID<input type="text" name="loginId"></div>
 <br>
@@ -86,6 +86,7 @@ ${err}
     </tr>
     </c:forEach>
 </c:if>
+
   </tbody>
 </table>
 </form>
